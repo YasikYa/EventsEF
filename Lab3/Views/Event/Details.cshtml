@@ -1,0 +1,57 @@
+﻿@model Lab3.Models.EventDetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Event Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Agenda)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Agenda)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Technologies)
+        </dt>
+        <dd class="col-sm-10">
+            @string.Join(' ', Model.Technologies)
+        </dd>
+    </dl>
+</div>
+<h4>Event Participants | @Html.ActionLink("Add More", "AddParticipants", "Event", new { eventId = Model.Id })</h4>
+<table>
+    @foreach(var participant in Model.Participants)
+    {
+    <tr>
+        <td>
+            @participant.FirstName
+        </td>
+        <td>
+            @participant.LastName
+        </td>
+        <td>
+            @participant.Age
+        </td>
+        <td>
+            @Html.ActionLink("Remove", "RemoveParticipant", "Event", new { eventId = Model.Id, participantId = participant.Id })
+        </td>
+    </tr>
+    }
+</table>

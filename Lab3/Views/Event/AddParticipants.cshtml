@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "AddParticipants";
+}
+
+<h1>Add Participant for event - @ViewBag.eventName</h1>
+
+@using (Html.BeginForm("AddParticipants", "Event"))
+{
+    @Html.Hidden("eventId", (Guid)ViewBag.eventId)
+    <div class="form-group">
+        <label>Participants | @Html.ActionLink("Create New", "Create", "Participant", new { redirectUrl = Url.Action("AddParticipants", "Event", new { eventId = ViewBag.eventId, eventName = ViewBag.eventName}) })</label>
+        <div class="col-md-10">
+            @Html.ListBox("participantIds", (MultiSelectList)ViewBag.Participants)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Add" class="btn btn-primary" />
+    </div>
+}
+
